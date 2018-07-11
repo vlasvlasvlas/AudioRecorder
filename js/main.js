@@ -25,17 +25,8 @@ var analyserContext = null;
 var canvasWidth, canvasHeight;
 var recIndex = 0;
 
-/* TODO:
 
-- offer mono option
-- "Monitor input" switch
-*/
 
-function saveAudio() {
-    audioRecorder.exportWAV( doneEncoding );
-    // could get mono instead by saying
-    // audioRecorder.exportMonoWAV( doneEncoding );
-}
 
 function gotBuffers( buffers ) {
     var canvas = document.getElementById( "wavedisplay" );
