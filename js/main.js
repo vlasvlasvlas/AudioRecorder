@@ -1,11 +1,8 @@
 /* Copyright 2013 Chris Wilson
-
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
    You may obtain a copy of the License at
-
        http://www.apache.org/licenses/LICENSE-2.0
-
    Unless required by applicable law or agreed to in writing, software
    distributed under the License is distributed on an "AS IS" BASIS,
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,8 +22,16 @@ var analyserContext = null;
 var canvasWidth, canvasHeight;
 var recIndex = 0;
 
+/* TODO:
+- offer mono option
+- "Monitor input" switch
+*/
 
-
+function saveAudio() {
+    audioRecorder.exportWAV( doneEncoding );
+    // could get mono instead by saying
+    // audioRecorder.exportMonoWAV( doneEncoding );
+}
 
 function gotBuffers( buffers ) {
     var canvas = document.getElementById( "wavedisplay" );
@@ -81,12 +86,12 @@ function updateAnalysers(time) {
         canvasHeight = canvas.height;
         analyserContext = canvas.getContext('2d');
     }
-   
-  // analyzer draw code here
+
+    // analyzer draw code here
     {
-        //var SPACING = 10;
-        var BAR_WIDTH = 30;
-        var numBars = Math.round(canvasWidth); // / SPACING);
+        var SPACING = 3;
+        var BAR_WIDTH = 10;
+        var numBars = Math.round(canvasWidth / SPACING);
         var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
 
         analyserNode.getByteFrequencyData(freqByteData); 
@@ -105,8 +110,8 @@ function updateAnalysers(time) {
                 magnitude += freqByteData[offset + j];
             magnitude = magnitude / multiplier;
             var magnitude2 = freqByteData[i * multiplier];
-            analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 100%)";
-            analyserContext.fillRect(i , canvasHeight, canvasWidth, -magnitude);
+            analyserContext.fillStyle = "hsl( " + Math.round((i*360)/numBars) + ", 100%, 50%)";
+            analyserContext.fillRect(i * SPACING, canvasHeight, BAR_WIDTH, -magnitude);
         }
     }
     
