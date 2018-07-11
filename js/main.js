@@ -81,8 +81,8 @@ function updateAnalysers(time) {
         canvasHeight = canvas.height;
         analyserContext = canvas.getContext('2d');
     }
-
-    // analyzer draw code here
+   
+  // analyzer draw code here
     {
         //var SPACING = 10;
         var BAR_WIDTH = 30;
