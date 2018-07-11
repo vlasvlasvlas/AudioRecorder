@@ -94,7 +94,7 @@ function updateAnalysers(time) {
     // analyzer draw code here
     {
         var SPACING = 3;
-        var BAR_WIDTH = 1;
+        var BAR_WIDTH = 10;
         var numBars = Math.round(canvasWidth / SPACING);
         var freqByteData = new Uint8Array(analyserNode.frequencyBinCount);
 
@@ -143,7 +143,7 @@ function gotStream(stream) {
     audioInput = realAudioInput;
     audioInput.connect(inputPoint);
 
-//    audioInput = convertToMono( input );
+    audioInput = convertToMono( input );
 
     analyserNode = audioContext.createAnalyser();
     analyserNode.fftSize = 2048;
