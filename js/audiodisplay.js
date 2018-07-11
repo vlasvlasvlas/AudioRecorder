@@ -1,6 +1,6 @@
 function drawBuffer( width, height, context, data ) {
     var step = Math.ceil( data.length / width );
-    var amp = height ;
+    var amp = height/2 ;
     context.fillStyle = "silver";
     context.clearRect(0,0,width,height);
     for(var i=0; i < width; i++){
